@@ -1,19 +1,20 @@
-#include <iostream>
+#include <stdio.h>
+#include <stdbool.h>
 
 //costanti
-int const NUM_RIGHE = 3;
-int const NUM_COLONNE = 3;
+#define NUM_RIGHE 3
+#define NUM_COLONNE 3
 
-char const VUOTO = 0;
-char const GIOCATORE1 = 1;
-char const GIOCATORE2 = 2;
+#define VUOTO 0
+#define GIOCATORE1 1
+#define GIOCATORE2 2
 
-char const CARATTERE_GIOCATORE1 = 'X';
-char const CARATTERE_GIOCATORE2 = 'O';
+#define CARATTERE_GIOCATORE1 'X'
+#define CARATTERE_GIOCATORE2 'O'
 
-char const RISULTATO_PARI = 0;
-char const RISULTATO_VINCE_GIOCATORE1 = 1;
-char const RISULTATO_VINCE_GIOCATORE2 = 2;
+#define RISULTATO_PARI 0
+#define RISULTATO_VINCE_GIOCATORE1 1
+#define RISULTATO_VINCE_GIOCATORE2 2
 
 //variabili globali
 char TabellaGioco[NUM_RIGHE][NUM_COLONNE];
@@ -38,13 +39,13 @@ int main()
     //vis. tabella di gioco
     VisualizzaTabella();
 
-    //si ripete finchè la partita termina
+    //si ripete finchï¿½ la partita termina
     do
     {
         if (LeggiCoordinate(giocatore))
         {
             //controlla lo stato del gioco
-            //statoGioco = ControllaStatoGioco(giocatore, &finegioco);
+            statoGioco = ControllaStatoGioco(giocatore, &finegioco);
             //vis. tabella
             VisualizzaTabella();
             if (giocatore == 0)
@@ -57,7 +58,7 @@ int main()
     switch (statoGioco)
     {
     case RISULTATO_PARI:
-        printf("\nParità'");
+        printf("\nParitï¿½'");
         break;
     case RISULTATO_VINCE_GIOCATORE1:
         printf("\nVince giocatore 1");
@@ -108,9 +109,9 @@ bool LeggiCoordinate(int giocatore)
     //legge le coordinate della tastiera
     printf("\n------------ Giocatore %d-------------", (giocatore + 1));
     printf("\nRiga: ");
-    scanf_s("%d", &riga);
+    scanf("%d", &riga);
     printf("\nColonna: ");
-    scanf_s("%d", &colonna);
+    scanf("%d", &colonna);
     //verifica la correttezza dei valori inseriti
 
     if ((riga < 0) || (riga >= NUM_RIGHE) || (colonna < 0) || (colonna >= NUM_COLONNE))
@@ -118,7 +119,7 @@ bool LeggiCoordinate(int giocatore)
         printf("\nValori non corretti");
         return false;
     }
-    //verifica le la casella è già occupata
+    //verifica le la casella ï¿½ giï¿½ occupata
     if (TabellaGioco[riga][colonna] != VUOTO)
     { 
         printf("\nCasella occupata");
@@ -145,7 +146,7 @@ int ControllaStatoGioco(int giocatore, bool* terminato)
         risultato = RISULTATO_VINCE_GIOCATORE2;
         simbolo = GIOCATORE2;
     }
-//verifica se è stato fatto un tris sulle righe
+//verifica se ï¿½ stato fatto un tris sulle righe
     for (int i = 0; i < NUM_RIGHE; i++)
     {
         if ((TabellaGioco[i][0] == simbolo) && (TabellaGioco[i][1] == simbolo) && (TabellaGioco[i][2]))
@@ -154,7 +155,7 @@ int ControllaStatoGioco(int giocatore, bool* terminato)
             return risultato;
         }
     }
-    //verifica se è stato fatto un tris sulle colonne
+    //verifica se ï¿½ stato fatto un tris sulle colonne
     for (int i = 0; i < NUM_COLONNE; i++)
     {
         if ((TabellaGioco[0][i] == simbolo) && (TabellaGioco[1][i] == simbolo) && (TabellaGioco[2][i]))
@@ -163,7 +164,7 @@ int ControllaStatoGioco(int giocatore, bool* terminato)
             return risultato;
         }
     }
-    //verifica se è stato fatto un tris sulle colonne
+    //verifica se ï¿½ stato fatto un tris sulle colonne
     if ((TabellaGioco[0][0] == simbolo) && (TabellaGioco[1][1] == simbolo) && (TabellaGioco[2][2]))
     {
         *terminato = true;
